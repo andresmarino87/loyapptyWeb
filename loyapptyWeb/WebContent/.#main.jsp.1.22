@@ -1,0 +1,509 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!doctype html>
+<html>
+<head>
+<title>Loyappty</title>
+
+<!-- IE SCRIPT para HTML5 -->
+
+<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- FAVICON -->
+<link rel="shortcut icon" href="css/img/favicon.png" type="image/png" />
+
+<!-- KENDO -->
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script type="text/javascript" src="js/kendo/kendo.core.js"></script>
+<script type="text/javascript" src="js/kendo/kendo.fx.js"></script>
+<script type="text/javascript" src="js/kendo/kendo.tabstrip.js"></script>
+
+<!-- DATATABLES -->
+
+<script type="text/javascript" src="js/libraries/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/libraries/TableTools.js"></script>
+<script type="text/javascript" src="js/libraries/ZeroClipboard.js"></script>
+
+<!-- JQuery UI -->
+
+<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/JavaScript" src="js/logout.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+
+
+<script type="text/javascript" src="js/jquery.qtip-1.0.0-rc3.min.js"></script>
+<script type="text/javascript" src="js/jquery.simpletip-1.3.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.alerts.js"></script>
+
+
+<!-- HOJAS DE ESTILOS -->
+
+<link rel="stylesheet" type="text/css" href="css/styles.css"  />
+<link href="css/kendo.common.css" rel="stylesheet" /> 
+<link href="css/kendo.default.css" rel="stylesheet" />
+<link rel="StyleSheet" type="text/css" href="css/fileuploader.css"></link>
+<link href="css/jquery.alerts.css" rel="stylesheet" type="text/css"/>
+<link href="css/jquery-ui-1.8.17.custom.css" rel="stylesheet" type="text/css"/>
+<link rel=StyleSheet type="text/css" href="css/table.css"  media=screen />
+<link rel=StyleSheet type="text/css" href="css/TableTools_JUI.css"  media=screen />
+<link rel=StyleSheet type="text/css" href="css/TableTools.css" media=screen />
+
+
+<!-- DON'T MOVE THIS STYLE!!!  -->
+
+<style media="all" type="text/css">
+.alignCenter {
+	text-align: center;
+}
+.underline_campaign{
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+</style>
+
+
+<!-- Carga el idioma -->
+		<%@page import="java.io.*"%>
+		<%@page import="java.util.*"%>
+		<%@page import="org.apache.log4j.*" %>
+
+		<%	
+			if((String)session.getAttribute("language") == null){
+				response.sendRedirect("./index.jsp");
+				return;
+			}
+			InputStream stream = application.getResourceAsStream("config"+File.separator+"var.properties");
+			Properties properties = new Properties();
+			properties.load(stream);
+			session.setAttribute("deployAmbient",properties.getProperty("deployAmbient"));
+			session.setAttribute("lifeTime",properties.getProperty("sessionLifeTime"));
+			session.setAttribute("tablesRefreshTime",properties.getProperty("tablesRefreshTime"));
+
+			String language = (String)session.getAttribute("language");			
+			String footerExt="";
+			stream = null;
+			if(language.equals("1")){  
+				stream = application.getResourceAsStream("config"+File.separator+"englishConf.properties");
+			}else{
+				stream = application.getResourceAsStream("config"+File.separator+"spanishConf.properties");
+				footerExt="_es";
+			}
+			properties = new Properties();
+			properties.load(stream);
+		
+			session.setAttribute("Logout",properties.getProperty("Logout"));
+			session.setAttribute("LogoutMsg",properties.getProperty("LogoutMsg"));
+			session.setAttribute("SignIn",properties.getProperty("SignIn"));
+			session.setAttribute("Login",properties.getProperty("Login"));
+			session.setAttribute("ForgotPwdMessage",properties.getProperty("ForgotPwdMessage"));
+			session.setAttribute("ForgotPwdInput",properties.getProperty("ForgotPwdInput"));
+			session.setAttribute("Send",properties.getProperty("Send"));
+			session.setAttribute("Email",properties.getProperty("Email"));
+			session.setAttribute("InvalidEmail",properties.getProperty("InvalidEmail"));
+			session.setAttribute("Password",properties.getProperty("Password"));
+			session.setAttribute("FatalError",properties.getProperty("FatalError"));
+			session.setAttribute("ForgotPwd",properties.getProperty("ForgotPwd"));
+			session.setAttribute("PasswordConfirm",properties.getProperty("PasswordConfirm"));
+			session.setAttribute("Name",properties.getProperty("Name"));
+			session.setAttribute("Lastname",properties.getProperty("Lastname"));
+			session.setAttribute("Website",properties.getProperty("Website"));
+			session.setAttribute("Zip",properties.getProperty("Zip"));
+			session.setAttribute("Address",properties.getProperty("Address"));
+			session.setAttribute("BusinessCategory",properties.getProperty("BusinessCategory"));
+			session.setAttribute("BusinessDescription",properties.getProperty("BusinessDescription"));
+			session.setAttribute("MainContact",properties.getProperty("MainContact"));
+			session.setAttribute("OtherContact",properties.getProperty("OtherContact"));
+			session.setAttribute("MsgRegistration",properties.getProperty("MsgRegistration"));
+			session.setAttribute("NewUser",properties.getProperty("NewUser"));
+			session.setAttribute("User_Menu_Tag",properties.getProperty("User_Menu_Tag"));
+			session.setAttribute("Profile_Menu_Tag",properties.getProperty("Profile_Menu_Tag"));
+			session.setAttribute("Suscriptor_Menu_Tag",properties.getProperty("Suscriptor_Menu_Tag"));
+			session.setAttribute("List_Menu_Tag",properties.getProperty("List_Menu_Tag"));
+			session.setAttribute("Service_Menu_Tag",properties.getProperty("Service_Menu_Tag"));
+			session.setAttribute("Broadcast_Menu_Tag",properties.getProperty("Broadcast_Menu_Tag"));
+			session.setAttribute("Credits_Menu_Tag",properties.getProperty("Credits_Menu_Tag"));
+			session.setAttribute("Report_Menu_Tag",properties.getProperty("Report_Menu_Tag"));
+			session.setAttribute("Id",properties.getProperty("Id"));
+			session.setAttribute("Suscriptor_Table_Service",properties.getProperty("Suscriptor_Table_Service"));
+			session.setAttribute("Suscriptor_Table_Opt-in",properties.getProperty("Suscriptor_Table_Opt-in"));
+			session.setAttribute("Suscriptor_Table_Device",properties.getProperty("Suscriptor_Table_Device"));
+			session.setAttribute("Broadcast_Send_Button_Tag",properties.getProperty("Broadcast_Send_Button_Tag"));
+			session.setAttribute("InvalidPwdorEmail",properties.getProperty("InvalidPwdorEmail"));
+			session.setAttribute("Validate",properties.getProperty("Validate"));
+			session.setAttribute("alreadyExist",properties.getProperty("alreadyExist"));
+			session.setAttribute("Suscriptor_Table_Details_tittle",properties.getProperty("Suscriptor_Table_Details_tittle"));
+			session.setAttribute("PwdNotNull",properties.getProperty("PwdNotNull"));
+			session.setAttribute("EmailNotNull",properties.getProperty("EmailNotNull"));
+			session.setAttribute("ErrorRPwdNULL",properties.getProperty("ErrorRPwdNULL"));
+			session.setAttribute("ErrorREmailRNULL",properties.getProperty("ErrorREmailRNULL"));
+			session.setAttribute("ErrorRNameNULL",properties.getProperty("ErrorRNameNULL"));
+			session.setAttribute("ErrorRLastNameNULL",properties.getProperty("ErrorRLastNameNULL"));
+			session.setAttribute("ErrorRZipNULL",properties.getProperty("ErrorRZipNULL"));
+			session.setAttribute("ErrorRAddressNULL",properties.getProperty("ErrorRAddressNULL"));
+			session.setAttribute("ErrorRMCNULL",properties.getProperty("ErrorRMCNULL"));
+			session.setAttribute("ErrorRPWDNM",properties.getProperty("ErrorRPWDNM"));
+			session.setAttribute("ErrorRBCNULL",properties.getProperty("ErrorRBCNULL"));
+			session.setAttribute("BC0",properties.getProperty("BC0"));
+			session.setAttribute("BC1",properties.getProperty("BC1"));
+			session.setAttribute("BC2",properties.getProperty("BC2"));
+			session.setAttribute("BC3",properties.getProperty("BC3"));
+			session.setAttribute("BC4",properties.getProperty("BC4"));
+			session.setAttribute("BC5",properties.getProperty("BC5"));
+			session.setAttribute("BC6",properties.getProperty("BC6"));
+			session.setAttribute("BC7",properties.getProperty("BC7"));
+			session.setAttribute("BC8",properties.getProperty("BC8"));
+			session.setAttribute("BC9",properties.getProperty("BC9"));
+			session.setAttribute("BC10",properties.getProperty("BC10"));
+			session.setAttribute("BC11",properties.getProperty("BC11"));
+			session.setAttribute("BC12",properties.getProperty("BC12"));
+			session.setAttribute("BC13",properties.getProperty("BC13"));
+			session.setAttribute("BC14",properties.getProperty("BC14"));
+			session.setAttribute("BC15",properties.getProperty("BC15"));
+			session.setAttribute("BC16",properties.getProperty("BC16"));
+			session.setAttribute("BC17",properties.getProperty("BC17"));
+			session.setAttribute("BC18",properties.getProperty("BC18"));
+			session.setAttribute("BC19",properties.getProperty("BC19"));
+			session.setAttribute("ChgPwd",properties.getProperty("ChgPwd"));
+			session.setAttribute("Alias",properties.getProperty("Alias"));
+			session.setAttribute("Type",properties.getProperty("Type"));
+			session.setAttribute("Status",properties.getProperty("Status"));
+			session.setAttribute("Service_Table_Details_tittle",properties.getProperty("Service_Table_Details_tittle"));
+			session.setAttribute("invalidToken",properties.getProperty("invalidToken"));
+			session.setAttribute("OK",properties.getProperty("OK"));
+			session.setAttribute("CreditsAvailable",properties.getProperty("CreditsAvailable"));
+			session.setAttribute("BuyCredits",properties.getProperty("BuyCredits"));
+			session.setAttribute("CreditTittle",properties.getProperty("CreditTittle"));
+			session.setAttribute("CreditsMessage",properties.getProperty("CreditsMessage"));
+			session.setAttribute("Number",properties.getProperty("Number"));
+			session.setAttribute("AreYouSure",properties.getProperty("AreYouSure"));
+			session.setAttribute("Description",properties.getProperty("Description"));
+			session.setAttribute("Icon",properties.getProperty("Icon"));
+			session.setAttribute("OnDemandMSG",properties.getProperty("OnDemand"));
+			session.setAttribute("Subscription",properties.getProperty("Subscription"));
+			session.setAttribute("SubscriptionMSG",properties.getProperty("SubscriptionMSG"));
+			session.setAttribute("PublishedMSG",properties.getProperty("Published"));
+			session.setAttribute("CanceledMSG",properties.getProperty("Canceled"));
+			session.setAttribute("FinishedMSG",properties.getProperty("Finished"));
+			session.setAttribute("Cancel",properties.getProperty("Cancel"));
+			session.setAttribute("Add",properties.getProperty("Add"));
+			session.setAttribute("Export",properties.getProperty("Export"));
+			session.setAttribute("Newgroup",properties.getProperty("Newgroup"));
+			session.setAttribute("Publish",properties.getProperty("Publish"));
+			session.setAttribute("Selectone",properties.getProperty("Selectone"));
+			session.setAttribute("Ondemand",properties.getProperty("Ondemand"));
+			session.setAttribute("Webservice",properties.getProperty("Webservice"));
+			session.setAttribute("urlto",properties.getProperty("urlto"));
+			session.setAttribute("Advmsg",properties.getProperty("Advmsg"));
+			session.setAttribute("Indexmsg",properties.getProperty("Indexmsg"));
+			session.setAttribute("Help",properties.getProperty("Help"));
+			session.setAttribute("City",properties.getProperty("City"));
+			session.setAttribute("Country",properties.getProperty("Country"));
+			session.setAttribute("Text",properties.getProperty("Text"));
+			session.setAttribute("Save",properties.getProperty("Save"));
+			session.setAttribute("Htmlurl",properties.getProperty("Htmlurl"));
+			session.setAttribute("Test",properties.getProperty("Test"));
+			session.setAttribute("Svdtmp",properties.getProperty("Svdtmp"));
+			session.setAttribute("Txttmp",properties.getProperty("Txttmp"));
+			session.setAttribute("Setmsg",properties.getProperty("Setmsg"));
+			session.setAttribute("Newmsg",properties.getProperty("Newmsg"));
+			session.setAttribute("Fromtmp",properties.getProperty("Fromtmp"));
+			session.setAttribute("Canwrite",properties.getProperty("Canwrite"));
+			session.setAttribute("Htmltmp",properties.getProperty("Htmltmp"));
+			session.setAttribute("Selcrecp",properties.getProperty("Selcrecp"));
+			session.setAttribute("Allsubs",properties.getProperty("Allsubs"));
+			session.setAttribute("Peralert",properties.getProperty("Peralert"));
+			session.setAttribute("PeralertQ",properties.getProperty("PeralertQ"));
+			session.setAttribute("File",properties.getProperty("File"));
+			session.setAttribute("Sendalert",properties.getProperty("Sendalert"));
+			session.setAttribute("Sendalertmsg",properties.getProperty("Sendalertmsg"));
+			session.setAttribute("Now",properties.getProperty("Now"));
+			session.setAttribute("Date",properties.getProperty("Date"));
+			session.setAttribute("Restrict",properties.getProperty("Restrict"));
+			session.setAttribute("Norestrict",properties.getProperty("Norestrict"));
+			session.setAttribute("Strtime",properties.getProperty("Strtime"));
+			session.setAttribute("Endtime",properties.getProperty("Endtime"));
+			session.setAttribute("Step",properties.getProperty("Step"));
+			session.setAttribute("Next",properties.getProperty("Next"));
+			session.setAttribute("Back",properties.getProperty("Back"));
+			session.setAttribute("Newserv",properties.getProperty("Newserv"));
+			session.setAttribute("Credit",properties.getProperty("Credit"));
+			session.setAttribute("Dislist",properties.getProperty("Dislist"));
+			session.setAttribute("Services",properties.getProperty("Services"));
+			session.setAttribute("Groups",properties.getProperty("Groups"));
+			session.setAttribute("Individual",properties.getProperty("Individual"));			
+			session.setAttribute("Buycredit",properties.getProperty("Buycredit"));
+			session.setAttribute("Subject",properties.getProperty("Subject"));
+			session.setAttribute("Subjectmsg",properties.getProperty("Subjectmsg"));
+			session.setAttribute("Editprofile",properties.getProperty("Editprofile"));
+			session.setAttribute("Allrequired",properties.getProperty("Allrequired"));
+			session.setAttribute("Nopersonalized",properties.getProperty("Nopersonalized"));
+			session.setAttribute("NoCredits",properties.getProperty("NoCredits"));
+			session.setAttribute("Optin",properties.getProperty("Optin"));
+			session.setAttribute("Pending",properties.getProperty("Pending"));
+			session.setAttribute("Completed",properties.getProperty("Completed"));
+			session.setAttribute("Processing",properties.getProperty("Processing"));
+			session.setAttribute("Sleeping",properties.getProperty("Sleeping"));
+			session.setAttribute("Begin_Date",properties.getProperty("Begin_Date"));
+			session.setAttribute("Expected_Messages",properties.getProperty("Expected_Messages"));
+			session.setAttribute("Msgs_Sent",properties.getProperty("Msgs_Sent"));
+			session.setAttribute("Msgs_failed",properties.getProperty("Msgs_failed"));
+			session.setAttribute("%",properties.getProperty("%"));
+			session.setAttribute("RestrictedDays",properties.getProperty("RestrictedDays"));
+			session.setAttribute("NoSubject",properties.getProperty("NoSubject"));
+			session.setAttribute("NoText",properties.getProperty("NoText"));
+			session.setAttribute("NoService",properties.getProperty("NoService"));
+			session.setAttribute("Dateon",properties.getProperty("Dateon"));			
+			session.setAttribute("Monday",properties.getProperty("Monday"));
+			session.setAttribute("Tuesday",properties.getProperty("Tuesday"));
+			session.setAttribute("Wednesday",properties.getProperty("Wednesday"));
+			session.setAttribute("Thursday",properties.getProperty("Thursday"));
+			session.setAttribute("Friday",properties.getProperty("Friday"));
+			session.setAttribute("Saturday",properties.getProperty("Saturday"));
+			session.setAttribute("Sunday",properties.getProperty("Sunday"));
+			session.setAttribute("Addalert",properties.getProperty("Addalert"));
+			session.setAttribute("Allfields",properties.getProperty("Allfields"));
+			session.setAttribute("Loyaltytitle",properties.getProperty("Loyaltytitle"));			
+			session.setAttribute("Suscriptor_Table_Alias",properties.getProperty("Suscriptor_Table_Alias"));		
+			session.setAttribute("Registermsg",properties.getProperty("Registermsg"));			
+			session.setAttribute("Clicktochange",properties.getProperty("Clicktochange"));
+			session.setAttribute("AlreadyExistService",properties.getProperty("AlreadyExistService"));
+			session.setAttribute("BusinessName",properties.getProperty("BusinessName"));
+			session.setAttribute("LocationRelevant",properties.getProperty("LocationRelevant"));
+			session.setAttribute("NoUrl",properties.getProperty("NoUrl"));
+			session.setAttribute("Newalerthelp",properties.getProperty("Newalerthelp"));
+			session.setAttribute("NewcampName",properties.getProperty("NewcampName"));
+			session.setAttribute("NewcampDesc",properties.getProperty("NewcampDesc"));
+			session.setAttribute("NewcampIcon",properties.getProperty("NewcampIcon"));
+			session.setAttribute("NewcampAdvc",properties.getProperty("NewcampAdvc"));
+			session.setAttribute("NewcampButton",properties.getProperty("NewcampButton"));
+			session.setAttribute("Registerhelploc",properties.getProperty("Registerhelploc"));
+			session.setAttribute("Notification",properties.getProperty("Notification"));
+			session.setAttribute("Qrcodeexplain",properties.getProperty("Qrcodeexplain"));
+			session.setAttribute("Changecountry",properties.getProperty("Changecountry"));
+			session.setAttribute("Businesscat",properties.getProperty("Businesscat"));
+			session.setAttribute("Buycreditsmsg",properties.getProperty("Buycreditsmsg"));
+			session.setAttribute("Buycreditsmsg2",properties.getProperty("Buycreditsmsg2"));
+			session.setAttribute("ErrorServiceNameNULL",properties.getProperty("ErrorServiceNameNULL"));
+			session.setAttribute("Delivered",properties.getProperty("Delivered"));
+			session.setAttribute("Logo",properties.getProperty("Logo"));
+			session.setAttribute("Refresh",properties.getProperty("Refresh"));	
+			session.setAttribute("ReloadTable",properties.getProperty("ReloadTable"));
+			session.setAttribute("BuyNow",properties.getProperty("BuyNow"));
+			session.setAttribute("PaymentTypes",properties.getProperty("PaymentTypes"));
+			session.setAttribute(",",properties.getProperty(","));
+			session.setAttribute(".",properties.getProperty("."));
+			session.setAttribute("ProfileMsg",properties.getProperty("ProfileMsg"));
+			session.setAttribute("Search",properties.getProperty("Search"));
+			session.setAttribute("TableInfoEmpty",properties.getProperty("TableInfoEmpty"));
+			session.setAttribute("TableInfo",properties.getProperty("TableInfo"));
+			session.setAttribute("TableInfoFiltered",properties.getProperty("TableInfoFiltered"));
+			session.setAttribute("TableProcessing",properties.getProperty("TableProcessing"));
+			session.setAttribute("TableZeroRecords",properties.getProperty("TableZeroRecords"));
+			session.setAttribute("Transaction",properties.getProperty("Transaction"));
+			session.setAttribute("QRcode",properties.getProperty("QRcode"));
+			session.setAttribute("BuycreditsmsgIpad",properties.getProperty("BuycreditsmsgIpad"));
+			session.setAttribute("Buycreditsmsg2Ipad",properties.getProperty("Buycreditsmsg2Ipad"));
+			session.setAttribute("EnterpriseLogo",properties.getProperty("EnterpriseLogo"));
+			session.setAttribute("UploadFile",properties.getProperty("UploadFile"));	
+			session.setAttribute("AboutUs",properties.getProperty("AboutUs"));
+			session.setAttribute("Pricing",properties.getProperty("Pricing"));
+			session.setAttribute("FAQ",properties.getProperty("FAQ"));
+			session.setAttribute("ContactUs",properties.getProperty("ContactUs"));
+			session.setAttribute("WhatsNew",properties.getProperty("WhatsNew"));
+			session.setAttribute("ResellerProgram",properties.getProperty("ResellerProgram"));
+			session.setAttribute("TermsofService",properties.getProperty("TermsofService"));
+			session.setAttribute("Adivisionof",properties.getProperty("Adivisionof"));
+			session.setAttribute("Delete",properties.getProperty("Delete"));
+			session.setAttribute("ServiceDeleteConfirm",properties.getProperty("ServiceDeleteConfirm"));
+		%> 
+<!-- FILEUPLOADER.js -->
+<script type="text/javascript">  
+//No mover!!! necesario para el idioma
+var fileUploadText="<%=(String)session.getAttribute("UploadFile")%>";
+
+$.getScript( "js/libraries/fileuploader.js" , function () { 
+}); 
+</script>
+		
+<script type="text/javascript">
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-29036687-1']);
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+
+ </script> 
+ <%@page import="loyapptyWeb.*"  %> 
+ <% 
+	UrlAssambler url = new UrlAssambler(); 
+	ServletCalls call = new ServletCalls();
+	String credits=request.getParameter("credits");
+	String res=request.getParameter("result");
+	
+	if(credits!=null && res!=null){
+		if(res.equals("OK")){
+			String result = call.callServlet(url.addCreditsUrl((String)session.getAttribute("token"), credits));
+			((Logger)session.getAttribute("log")).info("User "+(String)session.getAttribute("login")+" has been added "+credits+" credits");
+			response.sendRedirect("./main.jsp");
+		}
+	}
+ %>
+</head>
+<body>
+	<script  type="text/javascript">
+		var lifeTime=<%=(String)session.getAttribute("lifeTime") %>;	
+		var timeoutHandle =	window.setTimeout(function() {
+			$.post('jsp/logoutLogic.jsp',function(msg){
+				if(msg.result === 'OK'){
+					document.location='./index.jsp';
+				}else{
+					document.location='./index.jsp';
+				}
+			},"json");	
+		}, lifeTime); 
+		
+		$( 'body' ).mousemove(function(e){
+			$.post('jsp/sessionRefresh.jsp');
+			window.clearTimeout(timeoutHandle);
+			timeoutHandle = window.setTimeout(function() {
+				$.post('jsp/logoutLogic.jsp',function(msg){
+					if(msg.result === 'OK'){
+						document.location='./index.jsp';
+					}else{
+						document.location='./index.jsp';
+					}
+				},"json");	
+			}, lifeTime);
+		});	
+	</script>
+
+
+	<div id="pagewidth">
+		<div id="header">
+			<div id="logo">
+				<a href="#">
+				
+				<img src="images/logo2.png" width="150px" id="logoimage" alt="logo ogangi" /></a>
+			</div>
+			<div id="nav">
+						<a href="#" id="logout" class="button2" style="text-decoration:none">
+							<%=(String)session.getAttribute("Logout")%>
+						</a>
+			</div>
+		</div>
+
+		<!-- fin header-->
+		<div id="wrapper" class="clearfix">
+
+			<div id="twocols">
+				<div id="maincol">
+
+					<div id="maintabs" class="k-content">
+					
+						<div id="tabstrip">
+							<ul>
+								<li id="profiletab" ><%=(String)session.getAttribute("Profile_Menu_Tag")%></li>
+								<li id="subscriptortab"><%=(String)session.getAttribute("Suscriptor_Menu_Tag")%></li>
+								<li id="servicetab"><%=(String)session.getAttribute("Service_Menu_Tag")%></li>
+								<li id="alertstab"><%=(String)session.getAttribute("Broadcast_Menu_Tag")%></li>
+						 		<li id="creditstab"><%=(String)session.getAttribute("Credits_Menu_Tag")%></li>
+						 		<li id="creditsReporttab"><%=(String)session.getAttribute("Report_Menu_Tag")%></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="rightcol">
+						
+						<div id="credit_block" class="coins_icon"><a href="#" id="credit_link" class="selectTab" style="text-decoration:none;color:#fff;"><input id="tabIndex" value="4" style="display:none" />
+						
+						<img src="images/coins-icon.png"/>
+						<br />
+						<span id="credits_aviable_main" style="display:inline;"></span> <%=(String)session.getAttribute("Credit")%>
+						<br /><%=(String)session.getAttribute("Buycredit")%></a>
+						
+						</div>
+						
+						<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+						<script>
+								new TWTR.Widget({
+								  version: 2,
+								  type: 'profile',
+								  rpp: 2,
+								  interval: 30000,
+								  width: 172,
+								  height: 180,
+								  theme: {
+								    shell: {
+								      background: '#C5C5C5',
+								      color: '#000000'
+								    },
+								    tweets: {
+								      background: '#7a7a7a',
+								      color: '#000',
+								      links: '#fff'
+								    }
+								  },
+								  features: {
+								    scrollbar: false,
+								    loop: false,
+								    live: false,
+								    behavior: 'all'
+								  }
+								}).render().setUser('loyappty').start();
+						</script>
+
+				</div>
+			</div>
+		</div>
+ 
+ 
+ <div id="footer">
+			<table style="margin: 0 auto;">
+		  <tr>
+    <td align="center">
+	<table width="100%" border="0" align="center">
+      <tr>
+        <td colspan="2" align="center">&nbsp;</td>
+        </tr>
+       
+      <tr>
+        <td colspan="2" align="center"><a href="about<%=footerExt %>.html" target="_blank"><%=(String)session.getAttribute("AboutUs")%></a> 
+        | <a href="pricing<%=footerExt %>.html" target="_blank"><%=(String)session.getAttribute("Pricing")%></a> 
+        | <a href="faq<%=footerExt %>.html" target="_blank"><%=(String)session.getAttribute("FAQ")%></a> 
+        | <a href="contact<%=footerExt %>.html" target="_blank"><%=(String)session.getAttribute("ContactUs")%></a> <!-- | <a href="#">Support</a> --> 
+        | <a href="press<%=footerExt %>.html" target="_blank"><%=(String)session.getAttribute("WhatsNew")%></a> 
+        | <a href="reseller<%=footerExt %>.html" target="_blank"><%=(String)session.getAttribute("ResellerProgram")%></a> 
+        | <a href="termsofservice<%=footerExt %>.html" target="_blank"><%=(String)session.getAttribute("TermsofService")%></a></td>
+        </tr>
+      <tr>
+        <td colspan="2" align="center"><a href="copyrightpolicy.html">© 2012</a> Loyappty (<%=(String)session.getAttribute("Adivisionof")%> <a href="http://www.ogangi.com" target="_black">Ogangi Corporation</a>)</td>
+      </tr>
+      <!--
+      <tr>
+        <td colspan="2" align="center"><a href="http://www.ogangi.com" target="_black"><img src="images/icoOgangi.gif" width="69" height="29" border="0" /></a></td>
+      </tr>
+      -->
+    </table>
+	</td>
+  </tr>
+  
+  	</table>
+
+  	</div>
+  
+
+</div>
+
+</body>
+
+</html>

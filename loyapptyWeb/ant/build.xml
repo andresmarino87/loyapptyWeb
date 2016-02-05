@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="modules" default="makejar" basedir="../">
+    <target name="makejar">
+    	<jar jarfile="C:\Users\ANDRES\Desktop\loyapptyWeb.jar"
+    	    includes="loyapptyWeb\*.class"
+    		basedir="C:\Apache Software Foundation\Tomcat 7.0\wtpwebapps\loyapptyWeb\WEB-INF\classes" />
+    </target>
+</project>

@@ -1,0 +1,55 @@
+/.cvsignore/1.1/Wed May 30 13:16:38 2012//
+D/META-INF////
+D/WEB-INF////
+/about.html/1.5/Wed Dec 12 17:22:02 2012//
+/about_es.html/1.4/Wed Dec 12 17:22:02 2012//
+/alerts.jsp/1.13/Wed Dec 12 17:22:02 2012//
+D/certificate////
+D/config////
+/contact.html/1.5/Wed Dec 12 17:22:02 2012//
+/contact_es.html/1.5/Wed Dec 12 17:22:02 2012//
+/copyrightpolicy.html/1.6/Wed Dec 12 17:22:02 2012//
+/copyrightpolicy_es.html/1.2/Wed Dec 12 17:21:24 2012//
+/credits.jsp/1.10/Mon Dec 17 21:04:00 2012//
+/creditsReport.jsp/1.3/Wed Dec 12 17:22:02 2012//
+D/css////
+D/download////
+/download.jsp/1.14/Wed Dec 12 17:22:02 2012//
+/download_old.jsp/1.1/Thu Apr 12 20:41:57 2012//
+/facebookBridge.jsp/1.2/Wed Dec 12 17:22:10 2012//
+/faq.html/1.5/Wed Dec 12 17:21:32 2012//
+/faq_es.html/1.5/Fri Dec 21 16:17:42 2012//
+/flyer.jsp/1.3/Thu Dec 13 16:13:05 2012//
+D/images////
+/index.jsp/1.25/Wed Dec 12 19:37:51 2012//
+/index19102012.jsp/1.2/Wed Dec 12 17:21:15 2012//
+/indexPress.jsp/1.1/Thu Jun 21 19:15:37 2012//
+/indexPress_es.jsp/1.1/Thu Jun 21 19:15:37 2012//
+/indexProv.jsp/1.2/Wed Dec 12 17:21:13 2012//
+/index_mobile_es.jsp/1.1/Sat Mar 31 00:54:19 2012//
+/index_old.jsp/1.1/Sat Mar 31 00:54:19 2012//
+D/js////
+D/jsp////
+D/jwplayer////
+/list.jsp/1.1/Sat Mar 31 00:54:19 2012//
+D/logs////
+/loyapptyPaypalIPNHandler.jsp/1.2/Wed Dec 12 17:21:18 2012//
+/main.jsp/1.30/Wed Dec 26 15:56:48 2012//
+D/media////
+/press.html/1.5/Wed Dec 12 17:22:10 2012//
+/press_es.html/1.5/Wed Dec 12 17:22:10 2012//
+/pricing.html/1.6/Wed Dec 12 17:22:10 2012//
+/pricing_es.html/1.5/Wed Dec 12 17:22:10 2012//
+/privacy.html/1.5/Wed Dec 12 17:22:10 2012//
+/privacy_es.html/1.5/Wed Dec 12 17:22:10 2012//
+/profile.jsp/1.19/Mon Dec 17 19:49:37 2012//
+/reseller.html/1.3/Wed Dec 12 17:22:10 2012//
+/reseller_es.html/1.5/Wed Dec 12 17:22:10 2012//
+/service.jsp/1.13/Fri Dec 21 16:52:29 2012//
+/suscriptor.jsp/1.6/Fri Dec 21 16:28:58 2012//
+/tabla.jsp/1.1/Sat Mar 31 00:54:19 2012//
+/termsofservice.html/1.5/Wed Dec 12 17:22:29 2012//
+/termsofservice_es.html/1.5/Wed Dec 12 18:03:15 2012//
+/twitterBridge.jsp/1.2/Wed Dec 12 17:21:07 2012//
+/user.jsp/1.2/Thu Apr 19 15:06:08 2012//
+/validateEmail.jsp/1.2/Wed Dec 12 17:21:09 2012//
